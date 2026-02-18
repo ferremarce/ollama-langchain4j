@@ -12,7 +12,7 @@ import dev.langchain4j.service.AiServices;
  *
  * @author jmferreira
  */
-public class ChatMemoryExamples {
+public class OllamaChatMemory {
 
     public interface Assistant {
 
