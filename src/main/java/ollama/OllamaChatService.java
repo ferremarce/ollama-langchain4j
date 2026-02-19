@@ -5,6 +5,7 @@
 package ollama;
 
 import dev.langchain4j.model.chat.ChatModel;
+import dev.langchain4j.model.chat.request.ResponseFormat;
 import dev.langchain4j.model.ollama.OllamaChatModel;
 import java.time.Duration;
 
@@ -25,6 +26,7 @@ public class OllamaChatService {
                 .baseUrl(baseUrl)
                 .modelName(modelName)
                 .timeout(Duration.ofMinutes(2))
+//                .responseFormat(ResponseFormat.JSON)
                 .logRequests(Boolean.TRUE)
                 .logResponses(Boolean.TRUE)
                 .build();
