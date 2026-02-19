@@ -5,7 +5,6 @@
 package ollama;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.langchain4j.service.AiServices;
 import dev.langchain4j.service.SystemMessage;
 import dev.langchain4j.service.UserMessage;
@@ -23,8 +22,9 @@ public class OllamaAiService {
     static OllamaChatService chatService
             = new OllamaChatService(
                     "http://10.254.3.242:11434",
-                    //"gpt-oss"
-                    "gemma3:12b-cloud"
+                    //"deepseek-r1:7b"
+                    "gpt-oss"
+                    //"gemma3:12b-cloud"
             );
 
     interface NumberExtractor {
@@ -160,7 +160,7 @@ public class OllamaAiService {
         public String toString() {
             String cadena = "";
             for (OdsResultado odsr : lista) {
-                cadena += odsr;
+                cadena += odsr+"\n";
             }
             return cadena;
         }

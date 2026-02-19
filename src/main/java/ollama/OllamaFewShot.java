@@ -51,7 +51,7 @@ public class OllamaFewShot {
 
         CompletableFuture<ChatResponse> futureChatResponse = new CompletableFuture<>();
 
-        chatService.getModel().chat(fewShotHistory, new StreamingChatResponseHandler() {
+        chatService.getChatModel().chat(fewShotHistory, new StreamingChatResponseHandler() {
 
             @Override
             public void onPartialResponse(String partialResponse) {

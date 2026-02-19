@@ -26,7 +26,7 @@ public class OllamaStreamingChatMemory {
         OllamaStreamingChatService chatService
                 = new OllamaStreamingChatService(
                         "http://10.254.3.242:11434",
-                        "gemma3:4b"
+                        "deepseek-r1:7b"
                 );
 
         ChatMemory chatMemory = MessageWindowChatMemory.builder()
@@ -47,7 +47,7 @@ public class OllamaStreamingChatMemory {
         System.out.println("[User]: " + userMessage1.singleText());
         System.out.print("[LLM]: ");
 
-        AiMessage aiMessage1 = streamChat(chatService.getModel(), chatMemory);
+        AiMessage aiMessage1 = streamChat(chatService.getChatModel(), chatMemory);
         chatMemory.add(aiMessage1);
 
         UserMessage userMessage2 = userMessage(
@@ -58,7 +58,7 @@ public class OllamaStreamingChatMemory {
         System.out.println("\n\n[User]: " + userMessage2.singleText());
         System.out.print("[LLM]: ");
 
-        AiMessage aiMessage2 = streamChat(chatService.getModel(), chatMemory);
+        AiMessage aiMessage2 = streamChat(chatService.getChatModel(), chatMemory);
         chatMemory.add(aiMessage2);
     }
 

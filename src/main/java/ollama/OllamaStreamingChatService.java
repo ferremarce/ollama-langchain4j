@@ -17,14 +17,14 @@ import java.util.concurrent.CompletableFuture;
  */
 public class OllamaStreamingChatService {
 
-    private final StreamingChatModel model;
+    private final StreamingChatModel chatModel;
 
-    public StreamingChatModel getModel() {
-        return model;
+    public StreamingChatModel getChatModel() {
+        return chatModel;
     }
 
     public OllamaStreamingChatService(String baseUrl, String modelName) {
-        this.model = OllamaStreamingChatModel.builder()
+        this.chatModel = OllamaStreamingChatModel.builder()
                 .baseUrl(baseUrl)
                 .modelName(modelName)
                 .temperature(0.3)
@@ -42,7 +42,7 @@ public class OllamaStreamingChatService {
         CompletableFuture<String> futureResponse = new CompletableFuture<>();
         StringBuilder responseBuilder = new StringBuilder();
 
-        model.chat(userMessage, new StreamingChatResponseHandler() {
+        chatModel.chat(userMessage, new StreamingChatResponseHandler() {
 
             @Override
             public void onPartialResponse(String partialResponse) {
