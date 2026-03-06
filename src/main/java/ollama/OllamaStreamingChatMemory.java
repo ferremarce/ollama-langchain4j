@@ -26,7 +26,7 @@ public class OllamaStreamingChatMemory {
         OllamaStreamingChatService chatService
                 = new OllamaStreamingChatService(
                         "http://10.254.3.242:11434",
-                        "deepseek-r1:7b"
+                        "gemma3:4b"
                 );
 
         ChatMemory chatMemory = MessageWindowChatMemory.builder()

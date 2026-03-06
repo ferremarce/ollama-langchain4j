@@ -22,7 +22,7 @@ public class OllamaAiService {
     static OllamaChatService chatService
             = new OllamaChatService(
                     "http://10.254.3.242:11434",
-                    //"deepseek-r1:7b"
+                    //"llama3.1:8b"
                     "gpt-oss"
                     //"gemma3:12b-cloud"
             );
