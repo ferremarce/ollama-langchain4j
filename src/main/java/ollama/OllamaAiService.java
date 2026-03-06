@@ -11,7 +11,6 @@ import dev.langchain4j.service.UserMessage;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
-import ollama.OllamaAiService.ClasificacionOdsMultipleResponse;
 
 /**
  *
@@ -19,13 +18,12 @@ import ollama.OllamaAiService.ClasificacionOdsMultipleResponse;
  */
 public class OllamaAiService {
 
-    static OllamaChatService chatService
-            = new OllamaChatService(
-                    "http://10.254.3.242:11434",
-                    //"llama3.1:8b"
-                    "gpt-oss"
-                    //"gemma3:12b-cloud"
-            );
+    static OllamaChatService chatService = new OllamaChatService(
+            "http://10.254.3.242:11434",
+            // "llama3.1:8b"
+            "gpt-oss"
+    // "gemma3:12b-cloud"
+    );
 
     interface NumberExtractor {
 
@@ -93,7 +91,8 @@ public class OllamaAiService {
 
     public static void main2(String[] args) {
 
-        HotelReviewIssueAnalyzer hotelReviewIssueAnalyzer = AiServices.create(HotelReviewIssueAnalyzer.class, chatService.getChatModel());
+        HotelReviewIssueAnalyzer hotelReviewIssueAnalyzer = AiServices.create(HotelReviewIssueAnalyzer.class,
+                chatService.getChatModel());
 
         String review = "Our stay at hotel was a mixed experience. The location was perfect, just a stone's throw away "
                 + "from the beach, which made our daily outings very convenient. The rooms were spacious and well-decorated, "
@@ -104,7 +103,8 @@ public class OllamaAiService {
 
         List<IssueCategory> issueCategories = hotelReviewIssueAnalyzer.analyzeReview(review);
 
-        // Should output [MAINTENANCE_ISSUE, SERVICE_ISSUE, COMFORT_ISSUE, OVERALL_EXPERIENCE_ISSUE]
+        // Should output [MAINTENANCE_ISSUE, SERVICE_ISSUE, COMFORT_ISSUE,
+        // OVERALL_EXPERIENCE_ISSUE]
         System.out.println(issueCategories);
     }
 
@@ -132,26 +132,25 @@ public class OllamaAiService {
     public interface OdsClassifierService {
 
         @SystemMessage("""
-        Eres un experto en los 17 Objetivos de Desarrollo Sostenible (ODS).
-        
-        TAREA:
-        - Analizar el texto.
-        - Identificar hasta un máximo de 3 ODS relevantes.
-        - Ordenarlos por relevancia (el más importante primero).
-        - Para cada ODS proporcionar:
-            - objetivo (usar solo valores del enum)
-            - justificación breve en no mas de 50 palabras
-            - confianza entre 0 y 100
-        
-        REGLAS:
-        - Nunca devolver más de 3 ODS.
-        - Si solo corresponde 1 o 2, devolver solo esos.
-        - No inventar ODS.
-        - Tu respuesta debe ser exclusivamente un objeto JSON válido.
-    """)
+                    Eres un experto en los 17 Objetivos de Desarrollo Sostenible (ODS).
+
+                    TAREA:
+                    - Analizar el texto.
+                    - Identificar hasta un máximo de 3 ODS relevantes.
+                    - Ordenarlos por relevancia (el más importante primero).
+                    - Para cada ODS proporcionar:
+                        - objetivo (usar solo valores del enum)
+                        - justificación breve en no mas de 50 palabras
+                        - confianza entre 0 y 100
+
+                    REGLAS:
+                    - Nunca devolver más de 3 ODS.
+                    - Si solo corresponde 1 o 2, devolver solo esos.
+                    - No inventar ODS.
+                    - Tu respuesta debe ser exclusivamente un objeto JSON válido.
+                """)
         ClasificacionOdsMultipleResponse clasificar(
-                @UserMessage String texto
-        );
+                @UserMessage String texto);
     }
 
     public record ClasificacionOdsMultipleResponse(List<OdsResultado> lista) {
@@ -160,7 +159,7 @@ public class OllamaAiService {
         public String toString() {
             String cadena = "";
             for (OdsResultado odsr : lista) {
-                cadena += odsr+"\n";
+                cadena += odsr + "\n";
             }
             return cadena;
         }
@@ -219,10 +218,11 @@ public class OllamaAiService {
 
         ClasificacionOdsMultipleResponse respuesta = clasificador.clasificar(review);
         // En tu main, limpia manualmente:
-//        String response = clasificador.clasificar(review);
-//        String cleanJson = response.replaceAll("(?s)```json\\s*|```|\\n", "").trim();
-//        ObjectMapper mapper = new ObjectMapper();
-//        OdsResultado[] usersArray = mapper.readValue(cleanJson, OdsResultado[].class);
+        // String response = clasificador.clasificar(review);
+        // String cleanJson = response.replaceAll("(?s)```json\\s*|```|\\n", "").trim();
+        // ObjectMapper mapper = new ObjectMapper();
+        // OdsResultado[] usersArray = mapper.readValue(cleanJson,
+        // OdsResultado[].class);
 
         System.out.println(respuesta);
     }

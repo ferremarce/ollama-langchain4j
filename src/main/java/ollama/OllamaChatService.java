@@ -5,7 +5,6 @@
 package ollama;
 
 import dev.langchain4j.model.chat.ChatModel;
-import dev.langchain4j.model.chat.request.ResponseFormat;
 import dev.langchain4j.model.ollama.OllamaChatModel;
 import java.time.Duration;
 
@@ -26,7 +25,7 @@ public class OllamaChatService {
                 .baseUrl(baseUrl)
                 .modelName(modelName)
                 .timeout(Duration.ofMinutes(2))
-//                .responseFormat(ResponseFormat.JSON)
+                // .responseFormat(ResponseFormat.JSON)
                 .logRequests(Boolean.TRUE)
                 .logResponses(Boolean.TRUE)
                 .build();
@@ -39,8 +38,7 @@ public class OllamaChatService {
     public static void main(String[] args) {
         OllamaChatService ollama = new OllamaChatService(
                 "http://10.254.3.242:11434",
-                "gemma3:4b"
-        );
+                "gemma3:4b");
 
         String response = ollama.chat("Primero dime qué modelo eres y luego explícame qué es LangChain4j");
         System.out.println(response);
