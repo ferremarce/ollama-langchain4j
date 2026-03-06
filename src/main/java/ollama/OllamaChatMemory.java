@@ -27,7 +27,7 @@ public class OllamaChatMemory {
 
         OllamaChatService ollamaService = new OllamaChatService(
                 "http://10.254.3.242:11434",
-                "gemma3:4b"
+                "phi3:latest"
         );
         Assistant assistant = AiServices.builder(Assistant.class)
                 .chatModel(ollamaService.getChatModel())
